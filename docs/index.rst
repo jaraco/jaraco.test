@@ -12,6 +12,16 @@ Welcome to |project| documentation!
     :undoc-members:
     :show-inheritance:
 
+.. automodule:: jaraco.test.complexity
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+.. automodule:: jaraco.test.http
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 
 Indices and tables
 ==================

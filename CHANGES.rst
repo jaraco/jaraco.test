@@ -1,3 +1,8 @@
+v5.4.0
+======
+
+Added ``complexity`` module.
+
 v5.3.0
 ======
 
