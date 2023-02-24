@@ -55,7 +55,7 @@ def run_experiments(
         timeit.timeit(
             stmt,
             setup,
-            number=1,
+            number=3,
             globals=dict(ns, func=func, factory=factory, size=size),
         )
         for size in sizes
