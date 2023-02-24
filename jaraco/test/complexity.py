@@ -28,9 +28,7 @@ def identity(x):
     return x
 
 
-def is_linear_time(
-    func, factory=identity, sizes=tuple(itertools.islice(powers_of_two, 10)), **ns
-):
+def is_linear_time(*args, **kwargs):
     """
     Does func run in linear time?
 
@@ -42,7 +40,12 @@ def is_linear_time(
     >>> is_linear_time(n_sq)
     False
     """
+    return is_linear(*run_experiments(*args, **kwargs))
 
+
+def run_experiments(
+    func, factory=identity, sizes=tuple(itertools.islice(powers_of_two, 10)), **ns
+):
     stmt = 'func(data)'
     setup = 'data = factory(size)'
     # time the experiments
@@ -55,4 +58,4 @@ def is_linear_time(
         )
         for size in sizes
     ]
-    return is_linear(sizes, times)
+    return sizes, times
