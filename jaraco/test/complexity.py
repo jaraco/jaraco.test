@@ -6,19 +6,21 @@ import numpy
 
 def is_linear(x, y):
     """Return True if the dataset is linear, False otherwise."""
+    residual_sum_of_squares, expected = calc_residual_sum_of_squares(x, y)
+    # Return True if the residual sum of squares is significantly less
+    # than the expected residual sum of squares.
+    return residual_sum_of_squares < expected * 0.05
+
+
+def calc_residual_sum_of_squares(x, y):
     x = numpy.array(x)
     y = numpy.array(y)
     A = numpy.vstack([x, numpy.ones(len(x))]).T
     # Compute the slope and intercept of the regression line.
     slope, intercept = numpy.linalg.lstsq(A, y, rcond=None)[0]
-    # Compute the residual sum of squares.
     residual_sum_of_squares = numpy.sum((y - (slope * x + intercept)) ** 2)
-    # Compute the expected residual sum of squares for a linear
-    # dataset.
     expected_residual_sum_of_squares = numpy.sum((y - y.mean()) ** 2)
-    # Return True if the residual sum of squares is significantly less
-    # than the expected residual sum of squares.
-    return residual_sum_of_squares < expected_residual_sum_of_squares * 0.05
+    return residual_sum_of_squares, expected_residual_sum_of_squares
 
 
 powers_of_two = (2**n for n in itertools.count())
