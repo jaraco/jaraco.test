@@ -1,6 +1,24 @@
 import timeit
-import statistics
 import itertools
+
+import numpy
+
+
+def is_linear(x, y):
+    """Return True if the dataset is linear, False otherwise."""
+    x = numpy.array(x)
+    y = numpy.array(y)
+    A = numpy.vstack([x, numpy.ones(len(x))]).T
+    # Compute the slope and intercept of the regression line.
+    slope, intercept = numpy.linalg.lstsq(A, y, rcond=None)[0]
+    # Compute the residual sum of squares.
+    residual_sum_of_squares = numpy.sum((y - (slope * x + intercept)) ** 2)
+    # Compute the expected residual sum of squares for a linear
+    # dataset.
+    expected_residual_sum_of_squares = numpy.sum((y - y.mean()) ** 2)
+    # Return True if the residual sum of squares is significantly less
+    # than the expected residual sum of squares.
+    return residual_sum_of_squares < expected_residual_sum_of_squares * 0.05
 
 
 powers_of_two = (2**n for n in itertools.count())
@@ -27,17 +45,14 @@ def is_linear_time(
 
     stmt = 'func(data)'
     setup = 'data = factory(size)'
-    # calculate time/size for each size
-    norm_times = [
+    # time the experiments
+    times = [
         timeit.timeit(
             stmt,
             setup,
             number=1,
             globals=dict(ns, func=func, factory=factory, size=size),
         )
-        / size
         for size in sizes
     ]
-    # the func was linear if norm_times is essentially constant
-    ratio = statistics.stdev(norm_times) / norm_times[0]
-    return ratio < 1
+    return is_linear(sizes, times)
