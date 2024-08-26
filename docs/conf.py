@@ -54,3 +54,9 @@ extlinks = {
 extensions += ['sphinx.ext.extlinks']
 
 # local
+
+# jaraco/jaraco.test#8
+nitpick_ignore += [
+    ('py:class', '_pytest.config.Config'),
+    ('py:class', '_pytest.nodes.Item'),
+]

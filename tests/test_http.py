@@ -3,7 +3,8 @@ import urllib.request
 import pytest
 
 
-def test_needs_internet(needs_internet):
+@pytest.mark.usefixtures("needs_internet")
+def test_needs_internet() -> None:
     """
     This test should always succeed or be skipped.
     """
@@ -11,7 +12,7 @@ def test_needs_internet(needs_internet):
 
 
 @pytest.mark.network
-def test_network_marker():
+def test_network_marker() -> None:
     """
     This test should always succeed or be skipped.
     """

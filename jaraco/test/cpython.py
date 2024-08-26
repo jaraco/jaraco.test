@@ -10,11 +10,11 @@ Python versions (for compatibility with Python 3.9 and earlier).
 import importlib
 import types
 
-from jaraco.context import suppress
 from jaraco.collections import Projection
+from jaraco.context import suppress
 
 
-def from_test_support(*names):
+def from_test_support(*names: str) -> types.SimpleNamespace:
     """
     Return a SimpleNamespace of names from test.support.
 
@@ -28,7 +28,7 @@ def from_test_support(*names):
 
 
 @suppress(ImportError)
-def try_import(name):
+def try_import(name: str) -> types.ModuleType:
     """
     Attempt to import a submodule of test.support; return None if missing.
     """
