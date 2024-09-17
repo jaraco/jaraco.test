@@ -1,3 +1,12 @@
+v5.5.0
+======
+
+Features
+--------
+
+- Complete annotations and add ``py.typed`` marker -- by :user:`Avasam` (#8)
+
+
 v5.4.0
 ======
 
