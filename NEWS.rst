@@ -1,3 +1,12 @@
+v5.5.1
+======
+
+Bugfixes
+--------
+
+- Added `__future__.annotations`. (#10)
+
+
 v5.5.0
 ======
 
