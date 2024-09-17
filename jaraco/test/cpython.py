@@ -7,6 +7,8 @@ Python versions (for compatibility with Python 3.9 and earlier).
 <function temp_dir at ...>
 """
 
+from __future__ import annotations
+
 import importlib
 import types
 
