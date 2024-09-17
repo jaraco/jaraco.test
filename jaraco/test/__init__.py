@@ -1,7 +1,7 @@
 import sys
 
 
-def property_error(name):
+def property_error(name: str) -> str:
     """
     Generate a regular expression for capturing the expected
     error messages that can result from attempting to set
