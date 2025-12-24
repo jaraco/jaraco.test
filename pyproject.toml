@@ -75,9 +75,9 @@ type = [
 	# local
 ]
 
-
-[project.entry-points]
-pytest11 = {"jaraco.test.http" = "jaraco.test.http"}
+[project.entry-points."pytest11"]
+"jaraco.test.http" = "jaraco.test.http"
+"jaraco.test.git" = "jaraco.test.git"
 
 
 [tool.setuptools_scm]
