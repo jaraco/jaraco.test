@@ -2,9 +2,8 @@ from __future__ import annotations
 
 import urllib.request
 
-import pytest
-
 import jaraco.functools
+import pytest
 from jaraco.context import ExceptionTrap
 
 
