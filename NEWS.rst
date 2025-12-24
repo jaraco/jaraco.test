@@ -1,3 +1,12 @@
+v5.6.0
+======
+
+Features
+--------
+
+- Add ensure_git fixture.
+
+
 v5.5.1
 ======
 
