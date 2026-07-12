@@ -32,7 +32,7 @@ def ensure_git() -> None:
 
 
 @ExceptionTrap((OSError, subprocess.CalledProcessError)).passes
-def has_origin() -> None:
+def _has_origin() -> None:
     """
     Is the current directory a git checkout with an 'origin' remote?
     """
@@ -44,13 +44,13 @@ def has_origin() -> None:
 
 
 @pytest.fixture
-def require_checkout() -> None:
+def ensure_checkout() -> None:
     """
     Skip the test unless a git checkout with an 'origin' remote is present.
 
     Useful for doctests and tests that shell out to git and would
     otherwise fail when run from a source tarball.
 
-    >>> getfixture('require_checkout')
+    >>> getfixture('ensure_checkout')
     """
-    has_origin() or pytest.skip("requires a git checkout with an 'origin' remote")
+    _has_origin() or pytest.skip("requires a git checkout with an 'origin' remote")
