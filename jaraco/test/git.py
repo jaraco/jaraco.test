@@ -4,6 +4,7 @@ import shutil
 import subprocess
 
 import pytest
+from jaraco.context import ExceptionTrap
 
 
 def _resolve_git() -> str | None:
@@ -28,3 +29,28 @@ def ensure_git() -> None:
     >>> getfixture('ensure_git')
     """
     _resolve_git() or pytest.skip("'git' command unavailable")
+
+
+@ExceptionTrap((OSError, subprocess.CalledProcessError)).passes
+def has_origin() -> None:
+    """
+    Is the current directory a git checkout with an 'origin' remote?
+    """
+    subprocess.run(
+        ['git', 'remote', 'get-url', 'origin'],
+        capture_output=True,
+        check=True,
+    )
+
+
+@pytest.fixture
+def require_checkout() -> None:
+    """
+    Skip the test unless a git checkout with an 'origin' remote is present.
+
+    Useful for doctests and tests that shell out to git and would
+    otherwise fail when run from a source tarball.
+
+    >>> getfixture('require_checkout')
+    """
+    has_origin() or pytest.skip("requires a git checkout with an 'origin' remote")
