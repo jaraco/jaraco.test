@@ -8,16 +8,15 @@ from jaraco.context import ExceptionTrap
 
 
 @jaraco.functools.once
-def has_internet() -> bool:
+@ExceptionTrap().passes
+def has_internet() -> None:
     """
     Is this host able to reach the Internet?
 
     Return True if the internet appears reachable and False
     otherwise.
     """
-    with ExceptionTrap() as trap:
-        urllib.request.urlopen('http://pypi.org')
-    return not trap
+    urllib.request.urlopen('http://pypi.org')
 
 
 def check_internet() -> None:
