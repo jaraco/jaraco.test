@@ -15,7 +15,7 @@ def has_internet() -> bool:
     Return True if the internet appears reachable and False
     otherwise.
     """
-    with ExceptionTrap() as trap:  # type: ignore[no-untyped-call] # jaraco/jaraco.context#15
+    with ExceptionTrap() as trap:
         urllib.request.urlopen('http://pypi.org')
     return not trap
 
