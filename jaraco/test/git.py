@@ -16,7 +16,7 @@ def _resolve_git() -> str | None:
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL,
         )
-    except Exception:
+    except (OSError, subprocess.CalledProcessError):
         return None
     return shutil.which('git')
 
